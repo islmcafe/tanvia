@@ -3,55 +3,801 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD LITON ALI</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Tanvia Anjuman Siddiq - Digital Humanities Researcher</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-navy: #1e3a8a;
+            --secondary-navy: #1e40af;
+            --accent-gold: #fbbf24;
+            --accent-teal: #14b8a6;
+            --text-dark: #1f2937;
+            --text-light: #f9fafb;
+            --text-gray: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-medium: rgba(0, 0, 0, 0.1);
+            --shadow-heavy: rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            --gradient-card: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--bg-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px var(--shadow-light);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-navy);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.375rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--text-dark);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--accent-gold);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--accent-gold), #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-medium);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .research-card {
+            background: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-accent);
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-medium);
+        }
+
+        .research-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .research-venue {
+            color: var(--accent-teal);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .research-status {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .experience-item {
+            position: relative;
+            background: var(--bg-white);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            margin-left: 2rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 20px 40px var(--shadow-medium);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 2.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            border: 3px solid var(--bg-white);
+            box-shadow: 0 0 0 3px var(--primary-navy);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-company {
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .job-period {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .job-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .job-description li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .job-description li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-medium);
+        }
+
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--text-light);
+            font-size: 2rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Education & Awards */
+        .education-grid, .awards-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .education-card, .award-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .education-card:hover, .award-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-medium);
+        }
+
+        .education-info h4, .award-info h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-meta, .award-meta {
+            text-align: right;
+        }
+
+        .cgpa, .award-icon {
+            background: var(--gradient-accent);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--bg-white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 4px 20px var(--shadow-medium);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .profile-img {
+                width: 280px;
+                height: 280px;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 2.25rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
-
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">MLA</div>
-            <ul class="nav-links">
+            <div class="logo">TAS</div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>             
-                <li><a href="#education">Education</a></li>                
-                <li><a href="#publications">Publications</a></li>
+                <li><a href="#research">Research</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
                 <li><a href="#awards">Awards</a></li>
-                <li><a href="#training">Training</a></li>
-                <li><a href="#memberships">Memberships</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu">
+            <button class="mobile-menu" id="mobileMenu">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>MD LITON ALI</h1>
-                <p class="subtitle">Information Science Researcher & Digital Library Specialist</p>
-                <p>Combating misinformation in health informatics and social media through innovative research in information behavior and knowledge management systems.</p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/3srliton/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://scholar.google.com/citations?user=ygCGG80AAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
-                    <a href="https://github.com/3srliton" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://x.com/3srliton" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.facebook.com/3srliton" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/3srliton" target="_blank"><i class="fab fa-instagram"></i></a>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Tanvia Anjuman Siddiq</h1>
+                    <p class="subtitle">Bridging Digital Humanities, Research, and Creativity</p>
+                    <p>I'm a researcher, educator, and creative professional passionate about exploring the intersections of digital humanities, AI ethics, data, and community engagement. With a background in Information Science and current research in Digital Humanities, I bring a unique perspective that blends academic rigor, technical expertise, and creative innovation.</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#research" class="btn-primary">
+                            <i class="fas fa-microscope"></i>
+                            View Research
+                        </a>
+                        <a href="mailto:tanviaan@ualberta.ca" class="btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Get In Touch
+                        </a>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="mailto:tanviaan@ualberta.ca" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" title="ResearchGate">
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                        <a href="#" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://avatars.githubusercontent.com/u/36761201?v=4?s=400" alt="MD LITON ALI" class="profile-img">
+                <div class="hero-image">
+                    <div class="hero-decoration"></div>
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face" alt="Tanvia Anjuman Siddiq" class="profile-img">
+                </div>
             </div>
         </div>
     </section>
@@ -59,161 +805,58 @@
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">About Me</h2>
-            <div class="about-content fade-in">
-                <div class="research-interests">
-                    <h3>Research Interests</h3>
-                    <ul class="interests-list">
-                        <li>Health Informatics</li>
-                        <li>Information Behavior</li>
-                        <li>Knowledge Management</li>
-                        <li>Library and Information Science</li>
-                        <li>Misinformation Studies</li>
-                        <li>Social Media Analysis</li>
-                        <li>Scientometrics</li>
-                    </ul>
-                </div>
-                <div class="research-summary">
-                    <p>My research focuses on combating misinformation in health informatics, social media, and online platforms. I analyze user information behavior and knowledge management to develop strategies for improving information accuracy and reliability. Additionally, I explore how libraries and information science can support effective knowledge systems and promote responsible information sharing.</p>
+            <div class="section-header fade-in">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Exploring the intersections of technology, humanities, and creativity</p>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="about-grid fade-in">
+                <div class="about-text">
+                    <p>I am currently pursuing my <span class="highlight">Master of Arts (Digital Humanities)</span> at the University of Alberta, where I combine academic research, technology, and creativity. My journey began with a Bachelor's in Information Science & Library Management at the University of Dhaka, which gave me strong foundations in knowledge systems, digital tools, and archival practices.</p>
                     
-                    <p>As an Assistant Cataloguer at the Islamic University of Technology (IUT), I lead digital transformation initiatives and manage comprehensive library systems. My work spans from modernizing library infrastructure to conducting extensive research on information behavior and digital literacy.</p>
+                    <p>I've worked in academia, NGOs, and cultural institutions, developing expertise in <span class="highlight">data analysis, digital knowledge management, and community engagement</span>. My creative edge lies in graphic design, visualization, and 2D/3D modeling, making me passionate about bridging technical and artistic perspectives.</p>
+                    
+                    <p>My research focuses on the <span class="highlight">ethical and philosophical dimensions of AI</span>, particularly in creative domains, while exploring how digital humanities can foster more inclusive and accessible knowledge systems.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-   <!-- Skills Section -->
-    <section id="skills" class="section skills">
-        <div class="container">
-            <h2 class="section-title fade-in">Skills & Expertise</h2>
-            <div class="skills-grid fade-in">
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Library Systems</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">KOHA</span>
-                        <span class="skill-tag">Dublin Core</span>
-                        <span class="skill-tag">MARC</span>
-                        <span class="skill-tag">Cataloging</span>
-                        <span class="skill-tag">Classification</span>
-                        <span class="skill-tag">DSpace</span>
-                        <span class="skill-tag">SLiMS</span>
-                        <span class="skill-tag">DocuDex</span>
-                        <span class="skill-tag">Automation</span>
-                        <span class="skill-tag">Digitization</span>
-                        <span class="skill-tag">Arichiving</span>
-
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3.9</div>
+                        <div class="stat-label">Current CGPA</div>
                     </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Technical Skills</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">R Programming</span>
-                        <span class="skill-tag">Database Management</span>
-                        <span class="skill-tag">Web Design</span>
-                        <span class="skill-tag">Networking</span>
-                        
+                    <div class="stat-card">
+                        <div class="stat-number">2+</div>
+                        <div class="stat-label">Years Experience</div>
                     </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-search"></i> Research & Analysis</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">Literature Review</span>
-                        <span class="skill-tag">Data Analysis</span>
-                        <span class="skill-tag">Academic Writing</span>
-                        <span class="skill-tag">Citation Management</span>
-                        <span class="skill-tag">SPSS</span>
-                        <span class="skill-tag">R</span>
-                        <span class="skill-tag">VOSViewer</span>
-                        <span class="skill-tag">NVivo</span>
-                        <span class="skill-tag">Quantitative Research</span>
-                        <span class="skill-tag">Qualitative Research</span>
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Education</h2>
-            <div class="education-grid fade-in">
-                <div class="education-item">
-                    <div class="education-content">
-                        <div class="degree">Masters in Information Science and Library Management</div>
-                        <div class="university">University of Dhaka</div>
-                        <div class="cgpa">CGPA: 3.97/4.00</div>
-                    </div>
-                    <div class="education-meta">
-                        <div class="year">2020 - 2021</div>
-                        <a href="#" class="view-btn">View Certificate</a>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="education-content">
-                        <div class="degree">Bachelor in Information Science and Library Management</div>
-                        <div class="university">University of Dhaka</div>
-                        <div class="cgpa">CGPA: 3.90/4.00</div>
-                    </div>
-                    <div class="education-meta">
-                        <div class="year">2015 - 2019</div>
-                        <a href="#" class="view-btn">View Certificate</a>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Awards</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Publications Section -->
-    <section id="publications" class="section">
+    <!-- Research Section -->
+    <section id="research" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Publications</h2>
-            <div class="publications-grid fade-in">
-                <div class="publication-item">
-                    <div class="publication-content">
-                        <div class="pub-title">Exploring university students' perceptions and attitudes toward associated factors of electronic learning during the COVID-19 pandemic</div>
-                        <div class="pub-journal">Advances in Online Education, 2024</div>
-                    </div>
-                    <div class="publication-meta">
-                        <div class="pub-year">2024</div>
-                        <a href="https://drive.google.com/file/d/1rGJd07rdm7skd5Zv-xjpg7NOpO9mFpE8/view?usp=drive_link" class="pub-link" target="_blank">View PDF</a>
-                    </div>
+            <div class="section-header fade-in">
+                <h2 class="section-title">Research & Publications</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="research-grid fade-in">
+                <div class="research-card">
+                    <h3 class="research-title">Ethical and Philosophical Dimensions of AI in Sculpture Creation: Authenticity, Human Creativity, and the Anchor Sail Framework for Innovation</h3>
+                    <p class="research-venue">CSDH/SCHN Annual Conference 2025, Toronto</p>
+                    <span class="research-status">Forthcoming</span>
                 </div>
-                <div class="publication-item">
-                    <div class="publication-content">
-                        <div class="pub-title">Knowledge and information sharing practices among multidisciplinary university dormitory residents: exploring the influence of gender, academic discipline, and degree level</div>
-                        <div class="pub-journal">Journal of Information and Knowledge Management (JIKM), 2023</div>
-                    </div>
-                    <div class="publication-meta">
-                        <div class="pub-year">2023</div>
-                        <a href="https://ijikm.uitm.edu.my/pdf/v13n2/13201.pdf" class="pub-link" target="_blank">View PDF</a>
-                    </div>
-                </div>
-                <div class="publication-item">
-                    <div class="publication-content">
-                        <div class="pub-title">Webometric analysis of alternative access to scholarly publication: special reference to LibGen and Sci-Hub</div>
-                        <div class="pub-journal">International Journal of Information and Knowledge Studies, 2023</div>
-                    </div>
-                    <div class="publication-meta">
-                        <div class="pub-year">2023</div>
-                        <a href="https://ijiks.biilsd.org.bd/index.php/ijiks/article/view/68/22" class="pub-link" target="_blank">View PDF</a>
-                    </div>
-                </div>
-                <div class="publication-item">
-                    <div class="publication-content">
-                        <div class="pub-title">Perceptions and behaviors of academic library users towards ethical use of library resources and services: reference to university students</div>
-                        <div class="pub-journal">Under Review</div>
-                    </div>
-                    <div class="publication-meta">
-                        <div class="pub-year">2024</div>
-                        <div class="pub-link" style="opacity: 0.6; cursor: not-allowed;">Pending</div>
-                    </div>
+                
+                <div class="research-card">
+                    <h3 class="research-title">Same Question, Different Answer: Ethical Accountability and Information Behavior under Version Drift in LLM Chatbot–Mediated Consumer Health Advice</h3>
+                    <p class="research-venue">In Progress</p>
+                    <span class="research-status">Draft</span>
                 </div>
             </div>
         </div>
@@ -222,59 +865,77 @@
     <!-- Experience Section -->
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Professional Experience</h2>
+            <div class="section-header fade-in">
+                <h2 class="section-title">Professional Experience</h2>
+                <div class="section-divider"></div>
+            </div>
+            
             <div class="experience-timeline fade-in">
                 <div class="experience-item">
-                    <div class="job-title">Liaison, Internation Affairs and External Communication</div>
-                    <div class="company">Islamic University of Technology (IUT)</div>
-                    <div class="period">2025 - Present</div>
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Teaching Assistant</h3>
+                            <p class="job-company">University of Alberta, Faculty of MTS</p>
+                        </div>
+                        <span class="job-period">Sept 2024 – Present</span>
+                    </div>
                     <div class="job-description">
                         <ul>
-
-                            <li>Ensure smooth coordination and support for international students, from admission to graduation.</li>
-                            <li>Serve as the primary contact for international student inquiries, services, and documentation.</li>
-                            <li>Facilitate communication between international students and university departments.</li>
-                            <li>Assist with visa processing, accommodation, orientation programs, and cultural integration.</li>
-                            <li>Coordinate with embassies, partner institutions, and government bodies on student-related matters.</li>
-                            <li>Maintain up-to-date records and provide reports on international student affairs. </li>
-                            <li>Promote a welcoming and inclusive environment for international students.</li>
-
+                            <li>Supporting undergraduate teaching, grading, and tutorials</li>
+                            <li>Facilitating classroom discussions and providing constructive feedback</li>
+                            <li>Assisting in syllabus design and course alignment with departmental goals</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="experience-item">
-                    <div class="job-title">Assistant Cataloguer</div>
-                    <div class="company">Islamic University of Technology (IUT)</div>
-                    <div class="period">2022 - Present</div>
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Data Management Executive</h3>
+                            <p class="job-company">Abalamban NGO, Gaibandha</p>
+                        </div>
+                        <span class="job-period">Aug 2020 – Aug 2023</span>
+                    </div>
                     <div class="job-description">
                         <ul>
-                            <li>Led the modernization and implementation of the library's digital presence, including designing a new library website, developing Koha database, integrating barcode-based circulation and automated email notifications.</li>
-                            <li>Managed 40,000 reading materials, integrating department-wise textbook lists, e-resources and trained 10+ staff members in web-based library organization and automated all library sections to reduce manual work.</li>
+                            <li>Managed and analyzed survey data while maintaining digital data systems</li>
+                            <li>Designed training modules and conducted workshops for underprivileged groups</li>
+                            <li>Collaborated with international organizations on development projects</li>
+                            <li>Facilitated engagement with ethnic and minority communities</li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="experience-item">
-                    <div class="job-title">Research Assistant</div>
-                    <div class="company">Land Administration Training Center, Ministry of Land</div>
-                    <div class="period">2022 - 2024</div>
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Library Service Intern</h3>
+                            <p class="job-company">Dhaka University Library</p>
+                        </div>
+                        <span class="job-period">Nov 2019 – Jan 2020</span>
+                    </div>
                     <div class="job-description">
                         <ul>
-                            <li>Completed projects on public perception of land management digitization and assessing training impact.</li>
-                            <li>Designed and implemented comprehensive surveys and interviews across 08 divisions of Bangladesh.</li>
-                            <li>Utilized statistical software for data analysis, presented findings in detailed reports, and improved training programs based on data-driven insights.</li>
+                            <li>Worked across multiple departments including Administration, Acquisition, Processing, Planning & Development</li>
+                            <li>Used KOHA, DULIS, DSpace, and DocuDex for data entry, cataloging, and digital record maintenance</li>
+                            <li>Supported digitization and preservation initiatives for archival collections</li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="experience-item">
-                    <div class="job-title">Research Assistant</div>
-                    <div class="company">University of Dhaka</div>
-                    <div class="period">2021 - 2022</div>
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Documentation Service Intern</h3>
+                            <p class="job-company">BANSDOC (Bangladesh National Scientific & Technical Documentation Centre)</p>
+                        </div>
+                        <span class="job-period">Nov 2018 – Dec 2018</span>
+                    </div>
                     <div class="job-description">
                         <ul>
-                            <li>Completed two research projects on building a knowledge-based society and post-independence village life transformation based on Rajshahi district.</li>
-                            <li>Coordinated a 30-member research team, conducted fieldwork in 24 villages, and facilitated data collection through surveys and interviews.</li>
-                            <li>Analyzed qualitative and quantitative data, developed reports, and presented findings to academic peers and community representatives.</li>
+                            <li>Collected and disseminated scientific documents for professionals</li>
+                            <li>Assisted in inter-library loan processes across national and international libraries</li>
+                            <li>Trained in abstracting services, eBook creation, and information accessibility</li>
                         </ul>
                     </div>
                 </div>
@@ -282,242 +943,167 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="skills-grid fade-in">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Research & Data</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Quantitative Research</span>
+                        <span class="skill-tag">Qualitative Research</span>
+                        <span class="skill-tag">Database Management</span>
+                        <span class="skill-tag">Knowledge Management</span>
+                        <span class="skill-tag">Academic Writing</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Programming & Analytics</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">R</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Digital Humanities Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Voyant</span>
+                        <span class="skill-tag">spaCy</span>
+                        <span class="skill-tag">Gephi</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">ArcGIS/QGIS</span>
+                        <span class="skill-tag">StoryMapJS</span>
+                        <span class="skill-tag">WordPress</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Creative & Design</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Graphic Design</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">2D/3D Modeling</span>
+                        <span class="skill-tag">Animation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Education</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="education-grid fade-in">
+                <div class="education-card">
+                    <div class="education-info">
+                        <h4>Master of Arts (Digital Humanities)</h4>
+                        <p>University of Alberta</p>
+                        <p>Sept 2024 – Present</p>
+                    </div>
+                    <div class="education-meta">
+                        <span class="cgpa">CGPA: 3.9/4.0</span>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-info">
+                        <h4>Bachelor of Arts (Information Science and Library Management)</h4>
+                        <p>University of Dhaka</p>
+                        <p>Jan 2016 – Feb 2020</p>
+                    </div>
+                    <div class="education-meta">
+                        <span class="cgpa">CGPA: 3.63/4.0</span>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-info">
+                        <h4>Higher Secondary Certificate (Science)</h4>
+                        <p>Ahammad Uddin Shah Shishu Niketan School & College</p>
+                        <p>2015</p>
+                    </div>
+                    <div class="education-meta">
+                        <span class="cgpa">GPA: 5.0/5.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Awards Section -->
-
     <section id="awards" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Awards & Recognition</h2>
-            <div class="awards-list fade-in">
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-medal"></i></div>
-                    <div class="award-text">
-                        <h4>Mohammad Shahidullah Memorial Gold Medal (Masters)</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-star"></i></div>
-                    <div class="award-text">
-                        <h4>Dean's Merit List of Honour (Masters)</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-star"></i></div>
-                    <div class="award-text">
-                        <h4>Dean's Merit List of Honour (Undergraduate)</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-trophy"></i></div>
-                    <div class="award-text">
-                        <h4>Provost Award of Academic Excellence</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-book"></i></div>
-                    <div class="award-text">
-                        <h4>Book Grant from University of Dhaka for brilliant success in Masters</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <div class="award-text">
-                        <h4>University Grants Commission Undergraduate Scholarship</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-award"></i></div>
-                    <div class="award-text">
-                        <h4>Merit Scholarship from University of Dhaka</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-trophy"></i></div>
-                    <div class="award-text">
-                        <h4>First Place of the Internship at Dhaka University Library</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-yen-sign"></i></div>
-                    <div class="award-text">
-                        <h4>Mitsubishi UFJ Foundation Scholarship</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-trophy"></i></div>
-                    <div class="award-text">
-                        <h4>First Place of the Internship at BANSDOC</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-award"></i></div>
-                    <div class="award-text">
-                        <h4>ISLM Alumni Association Scholarship</h4>
-                    </div>
-                </div>
-                <div class="award-item">
-                    <div class="award-icon"><i class="fas fa-award"></i></div>
-                    <div class="award-text">
-                        <h4>Dhaka University Alumni Association Scholarship</h4>
-                    </div>
-                </div>
+            <div class="section-header fade-in">
+                <h2 class="section-title">Awards & Recognition</h2>
+                <div class="section-divider"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Training Section -->
-    <section id="training" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Training & Courses</h2>
-            <div class="training-grid fade-in">
-                <div class="training-item">
-                    <div class="training-title">E-Book preparation and Management</div>
-                    <div class="training-org">Bangladesh National Scientific and Technical Documentation Center (BANSDOC)</div>
-                    <div class="training-year">2025</div>
-                </div>
-                
-                <div class="training-item">
-                    <div class="training-title">Modern Library Management</div>
-                    <div class="training-org">Bangladesh National Library and Archives</div>
-                    <div class="training-year">2024</div>
-                </div>
-                
-                <div class="training-item">
-                    <div class="training-title">Statistical Analysis with R Programming</div>
-                    <div class="training-org">DataScape</div>
-                    <div class="training-year">2024</div>
-                </div>
-                <div class="training-item">
-                    <div class="training-title">Web Designing Using HTML, CSS & JAVASCRIPT</div>
-                    <div class="training-org">IIT, DU</div>
-                    <div class="training-year">2019 (Jan-Apr)</div>
-                </div>
-                <div class="training-item">
-                    <div class="training-title">KOHA Installation & Customization</div>
-                    <div class="training-org">Daffodil International University</div>
-                    <div class="training-year">2019 (Mar 16-20)</div>
-                </div>
-                <div class="training-item">
-                    <div class="training-title">Old Manuscript Reading and Translating</div>
-                    <div class="training-org">Dhaka University Library</div>
-                    <div class="training-year">2017</div>
-                </div>
-                <div class="training-item">
-                    <div class="training-title">Computer Fundamentals & OS Basics</div>
-                    <div class="training-org">ISLM, DU</div>
-                    <div class="training-year">2016 (Jan-Mar)</div>
-                </div>
-                <div class="training-item">
-                    <div class="training-title">Paper-based Research Learning</div>
-                    <div class="training-org">CHINTA Research Bangladesh</div>
-                    <div class="training-year">2023</div>
-                </div>
-                <div class="training-item">
-                    <div class="training-title">HTML5, CSS3 & Bootstrap 4 For Web Development</div>
-                    <div class="training-org">Shikho Technologies</div>
-                    <div class="training-year">2021</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Memberships Section -->
-    <section id="memberships" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Professional Memberships</h2>
-            <div class="memberships-grid fade-in">
-                <div class="membership-item">
-                    <i class="fas fa-book-open"></i>
-                    <div class="membership-name">Library Association of Bangladesh (LAB)</div>
-                </div>
-                <div class="membership-item">
-                    <i class="fas fa-database"></i>
-                    <div class="membership-name">Bangladesh Association of Librarians, Information Scientists and Documentalists (BALID)</div>
-                </div>
-                <div class="membership-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <div class="membership-name">Association for Information Science and Technology (ASIS&T)</div>
-                </div>
-                <div class="membership-item">
-                    <i class="fas fa-university"></i>
-                    <div class="membership-name">Association for Library and Information Science Education (ALISE)</div>
-                </div>
-                <div class="membership-item">
-                    <i class="fas fa-globe-africa"></i>
-                    <div class="membership-name">Bibliotheca Alexandrina Information for Africa (BAIFA)</div>
-                </div>
-                <div class="membership-item">
-                    <i class="fas fa-laptop-code"></i>
-                    <div class="membership-name">Association of Computing Machinery (ACM)</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <h2 class="section-title fade-in" style="color: var(--text-light);">Get In Touch</h2>
-            <div class="contact-content fade-in">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>litonali@iut-dhaka.edu</span>
+            
+            <div class="awards-grid fade-in">
+                <div class="award-card">
+                    <div class="award-info">
+                        <h4>J. Gordin Kaplan Graduate Student Award</h4>
+                        <p>University of Alberta</p>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+8801797709873</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        <span>www.litonali.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Islamic University of Technology, Dhaka, Bangladesh</span>
+                    <div class="award-meta">
+                        <span class="award-icon"><i class="fas fa-trophy"></i> 2025</span>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Send Message</h3>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="organization">Organization/Institution</label>
-                                <input type="text" id="organization" name="organization">
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject *</label>
-                                <select id="subject" name="subject" required>
-                                    <option value="">Select a topic</option>
-                                    <option value="research">Research Collaboration</option>
-                                    <option value="consulting">Consulting</option>
-                                    <option value="speaking">Speaking Opportunity</option>
-                                    <option value="academic">Academic Inquiry</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" placeholder="Please describe your project, collaboration idea, or inquiry in detail..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+
+                <div class="award-card">
+                    <div class="award-info">
+                        <h4>Youth Delegate, Centre for Diplomatic Advancement</h4>
+                        <p>Youth Vision Assembly 2025, Netherlands</p>
+                    </div>
+                    <div class="award-meta">
+                        <span class="award-icon"><i class="fas fa-globe"></i> 2025</span>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-info">
+                        <h4>Higher Secondary Certificate Talent Pool Scholarship</h4>
+                        <p>Government of Bangladesh</p>
+                    </div>
+                    <div class="award-meta">
+                        <span class="award-icon"><i class="fas fa-star"></i> 2015</span>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-info">
+                        <h4>Secondary School Certificate Talent Pool Scholarship</h4>
+                        <p>Government of Bangladesh</p>
+                    </div>
+                    <div class="award-meta">
+                        <span class="award-icon"><i class="fas fa-medal"></i> 2013</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -526,12 +1112,98 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 MD LITON ALI. All rights reserved.</p>
+            <p>&copy; 2025 Tanvia Anjuman Siddiq. All rights reserved. | Email: tanviaan@ualberta.ca</p>
         </div>
     </footer>
 
-    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-<script src="script.js"></script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Typing effect for hero title
+        const heroTitle = document.querySelector('.hero-text h1');
+        const titleText = 'Tanvia Anjuman Siddiq';
+        heroTitle.innerHTML = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                heroTitle.innerHTML += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        // Start typing effect after a delay
+        setTimeout(typeWriter, 1000);
+    </script>
 </body>
 </html>
